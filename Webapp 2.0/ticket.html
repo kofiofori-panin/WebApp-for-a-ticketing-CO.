@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+      <!--jQuery CDN-->
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <title>Ticket Management - RealistWAYS</title>
+    <link rel="icon" href="hawk.png" type="image/x-icon">
+    <link rel="stylesheet" href="/CSS/styles2.css">
+</head>
+<body>
+    <button id="backToTop" class="btn btn-primary">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="navbar-brand logo" href="#">
+            <img src="/hawk.png" height="30" width="50" alt="logo" title="logo">
+        </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="ticket.html">Ticket Management</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dash.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="user.html">User Management</a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="profileDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Account Settings</a></li>
+                            <li><a class="dropdown-item" href="#">My Tickets</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="p-3">
+        <div class="row mb-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TicketForm">Add Ticket <i class="bi bi-ticket"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover text-center table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>User ID</th>
+                            <th>Description</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>Issue with login</td>
+                            <td>High</td>
+                            <td>Open</td>
+                            <td>16/06/2024</td>
+                            <td>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#readData"><i class="bi bi-eye" title="View"></i></button>
+                                <button class="btn btn-primary"><i class="bi bi-pencil-square" title="Update"></i></button>
+                                <button class="btn btn-danger"><i class="bi bi-trash" title="Delete"></i></button>
+                            </td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="TicketForm" tabindex="-1" aria-labelledby="TicketFormLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" data-bs-toggle="modal" data-bs-target="#TicketForm">Fill form</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" id="ticketForm">
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">User ID:</label>
+                            <input type="text" class="form-control" id="userId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea class="form-control" id="description" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority:</label>
+                            <select class="form-select" id="priority" required>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status:</label>
+                            <select class="form-select" id="status" required>
+                                <option value="Open">Open</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Closed">Reopened</option>
+                                <option value="Closed">On hold</option>
+                                <option value="Closed">Cancelled</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="createdAt" class="form-label">Created At:</label>
+                            <input type="date" class="form-control" id="createdAt" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="ticketForm" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--read data Modal-->
+    <div class="modal fade" id="readData" tabindex="-1" aria-labelledby="TicketFormLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">My Ticket</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" id="ticketForm">
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">User ID:</label>
+                            <input type="text" class="form-control" id="userId" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea class="form-control" id="description" rows="3" disabled></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority:</label>
+                            <select class="form-select" id="priority" disabled>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status:</label>
+                            <select class="form-select" id="status" disabled>
+                                <option value="Open">Open</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Closed">Reopened</option>
+                                <option value="Closed">On hold</option>
+                                <option value="Closed">Cancelled</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="createdAt" class="form-label">Created At:</label>
+                            <input type="date" class="form-control" id="createdAt" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/JS/backtotop.js"></script>
+    <script src="/JS/scripts2.js"></script>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>
+                Copyright &copy; 2024 RealistWAYS. Designed by
+                <span>Norbus Technology (NT)</span>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

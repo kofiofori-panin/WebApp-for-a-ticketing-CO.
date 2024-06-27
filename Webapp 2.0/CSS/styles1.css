@@ -1,0 +1,123 @@
+#backToTop {
+  position: fixed;
+  border-radius: 40px;
+  bottom: 20px;
+  right: 20px;
+  display:none;
+background-color: #007bff;
+  border-radius: 20%;
+  border-style: hidden;
+}
+
+#backToTop i{
+  color: #fff;
+}
+  .dropdown-menu {
+    background-color: #0a6cced9;
+    color: white;
+  }
+  
+  nav{
+    width: 130%;
+  }
+
+  .dropdown-menu a {
+    color: white;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #495057;
+    color: white;
+  }
+  img{
+    padding-left: 20px;
+  }
+
+  table tr td{
+    vertical-align: middle;
+  }
+
+  td button{
+    margin: 5px;
+  }
+
+  td button i{
+    font-size: 20px;
+  }
+
+  .modal-header{
+    background-color: #0d6efd;
+    color: #fff;
+  }
+
+  .modal-body form{
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+    padding: 0;
+  }
+
+  .modal-body form .inputField{
+    flex-basis: 68%;
+    border-left: 5px groove #0d6efd;
+    padding-left: 20px;
+  }
+
+  form .inputField > div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  form .inputField > div label{
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  #Userform form .inputField > div label::after{
+    content: "*";
+    color: red;
+  }
+
+  form .inputField > div input{
+    width: 75%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid #0d6efd;
+  }
+
+  
+.footer-bottom {
+  position: absolute;
+  bottom: 0;
+
+  background: #6c757d8f;
+  width: 130%;
+  padding: 12px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 15px;
+  word-spacing: 2px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.footer-bottom span {
+  text-transform: uppercase;
+  opacity: 0.5;
+  font-weight: 550;
+  color: #000;
+}
+
+#readData form .inputField > div input{
+  color: #000;
+  font-size: 18px;
+}
+  
+  
