@@ -1,8 +1,10 @@
 $(document).ready(function() {
+    // Toggle sidebar
     $('#toggleSidebar').click(function () {
         $('#sidebar').toggleClass('collapsed');
         $('#content').toggleClass('collapsed');
     });
+
     // Selectors for DOM elements
     var form = $('#myForm');
     var nameInput = $('#name');
@@ -10,11 +12,11 @@ $(document).ready(function() {
     var emailInput = $('#email');
     var fullNameInput = $('#fullName');
     var dateInput = $('#date');
-    var submitBtn = $('.submit');
+    var submitBtn = $('.btn-primary[form="myForm"]'); // selector to target submit button within the form
     var userInfo = $('#data');
     var modal = $('#Userform');
     var modalTitle = $('#Userform .modal-title');
-    var newUserBtn = $('.newUser');
+    var newUserBtn = $('.btn-primary[data-bs-target="#Userform"]'); // selector to target new user button
 
     let getData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : [];
     let isEdit = false, editId;
@@ -26,6 +28,8 @@ $(document).ready(function() {
         modalTitle.text('Fill the form');
         isEdit = false;
         form[0].reset();
+        passwordInput.prop('disabled', false); // Enable password field for new entry
+        dateInput.prop('disabled', false); // Enable createdAt field for new entry
     });
 
     function showInfo() {
@@ -62,12 +66,12 @@ $(document).ready(function() {
         var element = getData[index];
         isEdit = true;
         editId = index;
-        //  form fields with  getData[index]
+        // Populate form fields with data from getData[index]
         nameInput.val(element.userName);
-        passwordInput.val(element.password);
+        passwordInput.val(element.password).prop('disabled', true); // Disable password field for editing
         emailInput.val(element.email);
         fullNameInput.val(element.fullName);
-        dateInput.val(element.createdAt);
+        dateInput.val(element.createdAt).prop('disabled', true); // Disable createdAt field for editing
 
         submitBtn.text('Update');
         modalTitle.text('Update the form');
@@ -124,10 +128,7 @@ $(document).ready(function() {
         showInfo();
         form[0].reset();
         modal.modal('hide');
+        passwordInput.prop('disabled', false); // Enable password field after submit
+        dateInput.prop('disabled', false); // Enable createdAt field after submit
     });
-
 });
-
-
-
-
