@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .input-group-text {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <form action="dash.html" id="passwordForm">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" required>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="togglePassword">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="repeatPassword">Repeat Password</label>
+            <div class="input-group">
+                <input type="password" class="form-control" id="repeatPassword" required>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="toggleRepeatPassword">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <small id="passwordMismatch" class="form-text text-danger" style="display:none;">Passwords do not match</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const password = document.getElementById('password');
+        const repeatPassword = document.getElementById('repeatPassword');
+        const passwordMismatch = document.getElementById('passwordMismatch');
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleRepeatPassword = document.getElementById('toggleRepeatPassword');
+
+        const toggleVisibility = (inputField, icon) => {
+            if (inputField.type === 'password') {
+                inputField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                inputField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        };
+
+        togglePassword.addEventListener('click', function () {
+            toggleVisibility(password, this.querySelector('i'));
+        });
+
+        toggleRepeatPassword.addEventListener('click', function () {
+            toggleVisibility(repeatPassword, this.querySelector('i'));
+        });
+
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            if (password.value !== repeatPassword.value) {
+                e.preventDefault();
+                passwordMismatch.style.display = 'block';
+            } else {
+                passwordMismatch.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+
+$(document).ready(function() {
+    // Selectors for DOM elements
+    var form = $('#myForm');
+    var nameInput = $('#name');
+    var passwordInput = $('#password');
+    var emailInput = $('#email');
+    var fullNameInput = $('#fullName');
+    var dateInput = $('#date');
+    var submitBtn = $('.submit');
+    var userInfo = $('#data');
+    var modal = $('#Userform');
+    var modalTitle = $('#Userform .modal-title');
+    var newUserBtn = $('.newUser');
+
+    let getData = localStorage.getItem('userProfile') ? JSON.parse(localStorage.getItem('userProfile')) : [];
+    let isEdit = false, editId;
+
+    showInfo();
+
+    newUserBtn.on('click', function() {
+        submitBtn.text('Submit');
+        modalTitle.text('Fill the Form');
+        isEdit = false;
+        form[0].reset();
+    });
+
+    function showInfo() {
+        userInfo.empty(); // Clear existing rows
+        getData.forEach(function(element, index) {
+            let createElement = `<tr>
+                <td>${index + 1}</td>
+                <td>${element.Name}</td>
+                <td>${element.Password}</td>
+                <td>${element.Email}</td>
+                <td>${element.fullName}</td>
+                <td>${element.Date}</td>
+                <td>
+                    <button class="btn btn-success view-btn" data-bs-toggle="modal" data-bs-target="#readData"><i class="bi bi-eye" title="View"></i></button>
+                    <button class="btn btn-primary edit-btn"><i class="bi bi-pencil-square" title="Update"></i></button>
+                    <button class="btn btn-danger delete-btn"><i class="bi bi-trash" title="Delete"></i></button>
+                </td>
+            </tr>`;
+            userInfo.append(createElement);
+        });
+    }
+
+    function readInfo(index) {
+        var element = getData[index];
+        // Populate modal fields with data from getData[index]
+        // Assuming you have modals configured similarly to the form
+    }
+
+    function editInfo(index) {
+        var element = getData[index];
+        isEdit = true;
+        editId = index;
+        // Populate form fields with data from getData[index]
+        nameInput.val(element.Name);
+        passwordInput.val(element.Password); // Assuming this should populate passwordInput
+        emailInput.val(element.Email);
+        fullNameInput.val(element.fullName); // Assuming this should populate fullNameInput
+        dateInput.val(element.Date);
+
+        submitBtn.text('Update');
+        modalTitle.text('Update the Form');
+    }
+
+    function deleteInfo(index) {
+        if (confirm('Are you sure you want to delete?')) {
+            getData.splice(index, 1);
+            localStorage.setItem('userProfile', JSON.stringify(getData));
+            showInfo();
+        }
+    }
+
+    // Event handlers
+    userInfo.on('click', '.view-btn', function() {
+        var index = $(this).closest('tr').index();
+        readInfo(index);
+        $('#readData').modal('show');
+    });
+
+    userInfo.on('click', '.edit-btn', function() {
+        var index = $(this).closest('tr').index();
+        editInfo(index);
+        modal.modal('show');
+    });
+
+    userInfo.on('click', '.delete-btn', function() {
+        var index = $(this).closest('tr').index();
+        deleteInfo(index);
+    });
+
+    form.on('submit', function(event) {
+        event.preventDefault();
+
+        var information = {
+            Name: nameInput.val(),
+            Password: passwordInput.val(), // Assuming this should capture age from passwordInput
+            fullName: fullNameInput.val(), // Assuming this should capture city from fullNameInput
+            Email: emailInput.val(),
+            Date: dateInput.val()
+        };
+
+        if (!isEdit) {
+            getData.push(information);
+        } else {
+            getData[editId] = information;
+            isEdit = false;
+        }
+
+        localStorage.setItem('userProfile', JSON.stringify(getData));
+
+        submitBtn.text('Submit');
+        modalTitle.text('Fill the Form');
+        showInfo();
+        form[0].reset();
+        modal.modal('hide');
+    });
+
+});
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .contact-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .contact-container h2 {
+            margin-top: 0;
+        }
+        .contact-info {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-info li {
+            margin: 10px 0;
+        }
+        .contact-info li span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h2>Contact Us</h2>
+        <ul class="contact-info">
+            <li><span>Location:</span> 123 Main Street, Anytown, USA</li>
+            <li><span>Phone Number:</span> (123) 456-7890</li>
+            <li><span>Email:</span> contact@example.com</li>
+            <li><span>Business Hours:</span> Mon - Fri, 9am - 5pm</li>
+        </ul>
+    </div>
+</body>
+</html>
+
